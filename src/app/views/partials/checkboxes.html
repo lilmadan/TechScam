@@ -1,0 +1,23 @@
+<md-content class="md-padding" ng-controller="TodoController as vm">
+    <section data-ng-repeat="language in vm.languages">
+        <div layout="row">
+            <md-card class="md-whiteframe-8dp width-100per" md-theme="custom" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline anchor-link" data-ng-click="vm.navigateToDetail(language)">{{language.text}}</span>
+                        <span class="md-subhead">{{language.desc}}...<a target="_blank" href="{{language.wikiLink}}">(Know More)</a></span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media">
+                            <img class="anchor-link" src="{{language.imgUrl}}" />
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+                <!--  <md-card-actions layout="row" layout-align="end center">
+                    <md-button>Action 1</md-button>
+                    <md-button>Action 2</md-button>
+                </md-card-actions> -->
+            </md-card>
+        </div>
+    </section>
+</md-content>

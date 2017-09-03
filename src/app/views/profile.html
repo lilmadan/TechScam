@@ -1,0 +1,22 @@
+<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{vm.user.login}}</span>
+            <section class="md-subhead">Type : {{vm.user.type}} - Score : {{vm.user.score}}
+                <md-content>
+                    <h3 class="md-headline">Repos</h3>
+                    <div data-ng-repeat="repo in vm.repos">
+                        <a target="_blank" class="anchor-link" href="{{repo.html_url}}">{{repo.name}}</a>
+                    </div>
+                </md-content>
+            </section>
+        </md-card-title-text>
+        <md-card-title-media>
+            <div class="md-media-lg card-media">
+                <img src="{{vm.user.avatar_url}}" />
+            </div>
+        </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+    </md-card-actions>
+</md-card>

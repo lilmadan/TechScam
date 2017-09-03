@@ -1,0 +1,86 @@
+<md-content ng-controller="ControlPanelController as vm" class="md-padding">
+    <section>
+        <span><i class="material-icons">code</i> {{vm.codeCount}}  <md-tooltip
+              md-direction="bottom">
+              Code
+            </md-tooltip></span>
+        <span style="padding-left : 1.3em;"><i class="material-icons">vertical_align_top</i> {{vm.commitCount}} <md-tooltip
+              md-direction="bottom">
+              Commits
+            </md-tooltip></span>
+        <span style="padding-left : 1.3em;"><i class="material-icons">info</i> {{vm.issueCount}} <md-tooltip
+              md-direction="bottom">
+              Issues
+            </md-tooltip></span>
+        <span style="padding-left : 1.3em;"><i class="material-icons">help_outline</i>{{vm.wiki}} <md-tooltip
+              md-direction="bottom">
+              Wiki
+            </md-tooltip></span>
+        <span style="padding-left : 1.3em;"><i class="material-icons">perm_identity</i> {{vm.users}} <md-tooltip
+              md-direction="bottom">
+              Users
+            </md-tooltip></span>
+        <span style="padding-left : 1.3em;" class="anchor-link" data-ng-show="!vm.asc" data-ng-click="vm.sortOrder();"><i class="material-icons">arrow_downward</i> Z-A <md-tooltip
+              md-direction="bottom">
+              Descending Order
+            </md-tooltip></span>
+        <span style="padding-left : 1.3em;" class="anchor-link" data-ng-show="vm.asc" data-ng-click="vm.sortOrder();"><i class="material-icons">arrow_upward</i> A-Z <md-tooltip
+              md-direction="bottom">
+              Ascending Order
+            </md-tooltip></span>
+    </section>
+    <section>
+        <md-input-container>
+            <label>Search</label>
+            <input data-ng-model="vm.filter" type="text">
+        </md-input-container>
+        <md-button class="md-primary md-raised" data-ng-click="vm.filterResult();" >Search Repos</md-button>
+    </section>
+    <md-content style="width:110%">
+        <!--CardView-->
+        <div data-ng-repeat="repo in vm.repos">
+            <flippy class="fancy" ng-click="flip()" flip-duration="800" timing-function="ease-in-out">
+                <flippy-front>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3 class="anchor-link text-ellipsis" data-ng-click="vm.navigateToDetail(repo.owner)">{{repo.description}}</h3>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="material-icons" style="color: orange">domain</i> <a target="_blank" href="{{repo.html_url}}">{{repo.full_name}}</a>
+                    </div>
+                    <div>
+                        <i class="material-icons" style="color: orange">person</i>
+                        <label>{{repo.owner.login}}</label>
+                    </div>
+                    <div>
+                        <i class="material-icons" style="color: gold">star</i>
+                        <label>{{repo.stargazers_count}}</label>
+                    </div>
+                    <div>
+                        <span data-ng-show="!{{repo.private}}"><i class="material-icons" style="color: green">block</i> Not Private Repo</span>
+                        <span data-ng-show="{{repo.private}}"><i class="material-icons" style="color: red">done</i> Private Repo</span>
+                    </div>
+                </flippy-front>
+                <flippy-back>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3 class="anchor-link text-ellipsis" data-ng-click="vm.navigateToDetail(repo.owner)">{{repo.description}}</h3>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="material-icons" style="color: orange">call_merge</i>
+                        <label><a target="_blank" href="{{repo.svn_url}}">SVN</a></label>
+                    </div>
+                    <div>
+                        <i class="material-icons" style="color: orange">arrow_downward</i>
+                        <label><a target="_blank" href="{{repo.clone_url}}">Clone</a></label>
+                    </div>
+                </flippy-back>
+            </flippy>
+        </div>
+    </md-content>
+    <md-content>
+        <md-table-pagination style="background-color: turquoise" md-limit="query.limit" md-limit-options="query.pageArray" md-page="query.page" md-total="{{vm.totalItems}}" md-on-paginate="vm.getItems()" md-page-select></md-table-pagination>
+    </md-content>
+</md-content>
